@@ -8,11 +8,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: echo "<h1>test</h1>" > index.html
-      - name: Push to test-write branch
-        uses: JamesIves/github-pages-deploy-action@v4.6.7
-        with:
-          branch: test-write
-          folder: .
-          clean: true
-          token: ${{ secrets.GITHUB_TOKEN }}
+      - run: echo "<h1>token-test</h1>" > index.html
+      - name: Push new branch with GITHUB_TOKEN
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add index.html
+          git commit -m "token write test"
+          git push origin HEAD:refs/heads/test-write
